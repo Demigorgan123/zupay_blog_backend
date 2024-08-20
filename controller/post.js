@@ -37,3 +37,11 @@ const deletePostById = async(req, resp)=>{
     await post.findByIdAndDelete(req.params.id)
     return resp.json({status: "success"})
 }
+
+module.exports = {
+    getAllPost,
+    getPostById,
+    createNewPost,
+    updatePostById,
+    deletePostById
+}

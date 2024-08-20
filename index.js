@@ -3,7 +3,7 @@ const cors = require('cors')
 const app = express();
 const postRouter = require('./routes/post')
 const {connectDB} = require('./connectDB')
-const PORT = 5000
+const PORT = process.env.PORT
 
 connectDB().then(()=>console.log("Database Connected"))
 

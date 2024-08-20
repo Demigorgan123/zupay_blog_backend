@@ -6,30 +6,34 @@ const getAllPost = async(req, resp)=>{
 }
 
 const getPostById = async(req, resp)=>{
-    const post = post.findById(req.params.id);
-    if(!post) return resp.status(404).json({error: "Post not found"})
-    return resp.json(post)
+    const postRes = await post.findById(req.params.id);
+    if(!postRes) return resp.status(404).json({error: "Post not found"})
+    return resp.json(postRes)
 }
 
 const createNewPost = async(req, resp)=>{
-    const reqBody = req.body
-    if(!reqBody || !reqBody.author || !reqBody.title || !reqBody.body){
+    const {author, title, body} = req.body
+    if(!author || !title || !body){
         return resp.status(400).json({error: "All fields are required"})
     }
     const result = await post.create({
-        author: reqBody.author,
-        title: reqBody.title,
-        body: reqBody.body
+        author: author,
+        title: title,
+        body: body
     })
     return resp.status(201).json({msg: "success"})
 }
 
 const updatePostById = async(req, resp)=>{
-    const reqBody = req.body
-    if(!reqBody || !reqBody.author || !reqBody.title || !reqBody.body){
+    const {author, title, body} = req.body
+    if(!author || !title || !body){
         return resp.status(400).json({error: "All fields are required"})
     }
-    await post.findByIdAndUpdate(req.params.id, reqBody)
+    await post.findByIdAndUpdate(req.params.id,{
+        author: author,
+        title: title,
+        body: body
+    })
     return resp.json({status: "success"})
 }
 

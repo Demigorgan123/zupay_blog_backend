@@ -1,5 +1,5 @@
 const express = require('express')
-const router = express.Router();
+const postRouter = express.Router();
 const {getAllPost, getPostById, createNewPost, updatePostById, deletePostById} = require('../controller/post')
 
 router.route('/').get(getAllPost).post(createNewPost)
